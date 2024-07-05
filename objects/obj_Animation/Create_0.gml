@@ -1,19 +1,12 @@
-var _sequence = new MySequence();
-_sequence.add(new MyKeyframe(0, 320, EASE.IN_OUT_BACK));
-_sequence.add(new MyKeyframe(5, 960, EASE.IN_OUT_BACK));
-_sequence.add(new MyKeyframe(10, 320, EASE.IN_OUT_BACK));
+var sequence_x = new MySequence();
+sequence_x.add(new MyKeyframe(0, 320, EASE.IN_OUT_BACK));
+sequence_x.add(new MyKeyframe(5, 960, EASE.IN_OUT_BACK));
+sequence_x.add(new MyKeyframe(10, 320, EASE.IN_OUT_BACK));
 
-binding_x = new AnimationBinding(_sequence, function(_v)
-{
-	x = _v;
-});
+var sequence_y = new MySequence();
+sequence_y.add(new MyKeyframe(0, 180, EASE.IN_OUT_BACK));
+sequence_y.add(new MyKeyframe(5, 540, EASE.IN_OUT_BACK));
+sequence_y.add(new MyKeyframe(10, 180, EASE.IN_OUT_BACK));
 
-var _sequence2 = new MySequence();
-_sequence2.add(new MyKeyframe(0, 180, EASE.IN_OUT_BACK));
-_sequence2.add(new MyKeyframe(5, 540, EASE.IN_OUT_BACK));
-_sequence2.add(new MyKeyframe(10, 180, EASE.IN_OUT_BACK));
-
-binding_y = new AnimationBinding(_sequence2, function(_v)
-{
-	y = _v;
-});
+m_binding_x = new AnimationBinding(sequence_x, function(value) { x = value });
+m_binding_y = new AnimationBinding(sequence_y, function(value) { y = value });

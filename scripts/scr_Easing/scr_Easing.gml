@@ -36,11 +36,11 @@ enum EASE {
 /// @arg {real} a
 /// @arg {real} b
 /// @arg {real} v
-/// @arg {real} _ease
+/// @arg {real} ease
 /// @returns {real}
-function ease_interpolate(a, b, v, _ease)
+function ease_interpolate(a, b, v, ease)
 {
-	switch(_ease)
+	switch(ease)
 	{
 		case EASE.INSTANT:
 			return ease_instant(a, b, v);

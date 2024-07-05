@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"test_MyKeyframe",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"test_MyKeyframe",
+  "parent":{
+    "name":"tests",
+    "path":"folders/Scripts/tests.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

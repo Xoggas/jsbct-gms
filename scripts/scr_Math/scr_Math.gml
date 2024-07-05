@@ -1,4 +1,8 @@
-function inv_lerp(_a, _b, _v)
+/// @arg {real} a
+/// @arg {real} b
+/// @arg {real} v
+/// @returns {real
+function inv_lerp(a, b, v)
 {
-	return (_v - _a) / (_b - _a);
+	return (v - a) / (b - a);
 }

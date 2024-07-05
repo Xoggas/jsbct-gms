@@ -2,7 +2,7 @@ function MySequence() constructor
 {
 	m_keyframes = [];
 	
-	/// @arg {Struct.MyKeyframe} _keyframe
+	/// @arg {Struct.MyKeyframe} keyframe
 	/// @returns {undefined}
 	add = function(keyframe)
 	{
@@ -10,7 +10,7 @@ function MySequence() constructor
 		array_insert(m_keyframes, insertion_point, keyframe);
 	}
 	
-	/// @arg {real} _t
+	/// @arg {real} t
 	/// @returns {real}
 	evaluate = function(t)
 	{
@@ -22,33 +22,32 @@ function MySequence() constructor
 			return 0;
 		}	
 		
+		var first_keyframe = array_first(keyframes);
+		
 		if(keyframes_count == 1)
 		{
-			return array_first(keyframes).value;
+			return first_keyframe.get_value();
 		}
 		
-		if(keyframes_count == 2)
-		{
-			return keyframes[0].interpolate(keyframes[1], t);
-		}
-		
-		var first_keyframe = array_first(keyframes);
-	
 		if(t <= first_keyframe.m_time)
 		{
-			return first_keyframe.value;
+			return first_keyframe.get_value();
 		}
 	
 		var last_keyframe = array_last(keyframes);
 	
 		if(t >= last_keyframe.m_time)
 		{
-			return last_keyframe.value;
+			return last_keyframe.get_value();
+		}
+	
+		if(keyframes_count == 2)
+		{
+			return keyframes[0].interpolate(keyframes[1], t);
 		}
 	
 		var start_keyframe_index = binary_search(keyframes, t);
 		var end_keyframe_index = start_keyframe_index + 1;
-	
 		var start_keyframe = keyframes[start_keyframe_index];
 		var end_keyframe = keyframes[end_keyframe_index];
 	
