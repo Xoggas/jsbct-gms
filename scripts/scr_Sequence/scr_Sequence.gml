@@ -1,84 +1,87 @@
-Sequence = {
-	keyframes: [],
-}
-
-function Sequence() constructor
+function MySequence() constructor
 {
-}
-
-function sequence_add(_sequence, _keyframe)
-{
-	_insertion_point = binary_search(_sequence.keyframes, _keyframe.p_time);
-
-	array_insert(_sequence.keyframes, _insertion_point, _keyframe);
+	m_keyframes = [];
 	
-	return _sequence;
-}
-
-function sequence_evaluate(_sequence, _t)
-{
-	_keyframes_count = array_length(_sequence.keyframes);
-	
-	if(_keyframes_count == 0)
+	/// @arg {Struct.MyKeyframe} _keyframe
+	/// @returns {undefined}
+	add = function(keyframe)
 	{
-		return 0;
-	}	
-		
-	if(_keyframes_count == 1)
-	{
-		return array_first(_sequence.keyframes).value;
-	}
-		
-	if(_keyframes_count == 2)
-	{
-		_start_keyframe = _sequence.keyframes[0];
-		_end_keyframe = _sequence.keyframes[1];
-		return keyframe_interpolate(_start_keyframe, _end_keyframe, _t);
-	}
-		
-	_first_keyframe = array_first(_sequence.keyframes);
-	
-	if(_t <= _first_keyframe.p_time)
-	{
-		return _first_keyframe.value;
+		var insertion_point = binary_search(m_keyframes, keyframe.m_time) + 1;
+		array_insert(m_keyframes, insertion_point, keyframe);
 	}
 	
-	_last_keyframe = array_last(_sequence.keyframes);
-	
-	if(_t >= _last_keyframe.p_time)
+	/// @arg {real} _t
+	/// @returns {real}
+	evaluate = function(t)
 	{
-		return _last_keyframe.value;
-	}
+		var keyframes = m_keyframes;
+		var keyframes_count = array_length(keyframes);
 	
-	_start_keyframe_index = binary_search(_sequence.keyframes, _t);
-	_end_keyframe_index = _start_keyframe_index + 1;
-	
-	return keyframe_interpolate(_sequence.keyframes[_start_keyframe_index], _sequence.keyframes[_end_keyframe_index], _t);
-}
-
-function binary_search(_array, _t)
-{
-	_l = 0;
-	_r = array_length(_array);
-	
-	while(_l < _r)
-	{
-		_mid = (_l + _r) / 2;	
-		_item = _array[_mid];
-		
-		if(_t < _item.p_time)
+		if(keyframes_count == 0)
 		{
-			_r = _mid;
+			return 0;
+		}	
+		
+		if(keyframes_count == 1)
+		{
+			return array_first(keyframes).value;
 		}
-		else if(_t > item.p_time)
+		
+		if(keyframes_count == 2)
 		{
-			_l = _mid;
+			return keyframes[0].interpolate(keyframes[1], t);
+		}
+		
+		var first_keyframe = array_first(keyframes);
+	
+		if(t <= first_keyframe.m_time)
+		{
+			return first_keyframe.value;
+		}
+	
+		var last_keyframe = array_last(keyframes);
+	
+		if(t >= last_keyframe.m_time)
+		{
+			return last_keyframe.value;
+		}
+	
+		var start_keyframe_index = binary_search(keyframes, t);
+		var end_keyframe_index = start_keyframe_index + 1;
+	
+		var start_keyframe = keyframes[start_keyframe_index];
+		var end_keyframe = keyframes[end_keyframe_index];
+	
+		return start_keyframe.interpolate(end_keyframe, t);
+	}
+}
+
+/// @param {Array<Struct.MyKeyframe>} array
+/// @param {real} t
+/// @return {real}
+function binary_search(array, t)
+{
+	var l = 0;
+	var r = array_length(array);
+	
+	while(l < r)
+	{
+		var mid = (l + r) / 2;	
+		var item = array[mid];
+		
+		if(t < item.m_time)
+		{
+			r = mid;
+		}
+		else if(t > item.m_time)
+		{
+			l = mid;
 		}
 		else 
 		{
-			return _mid;
+			return mid;
 		}
 	}
 	
-	return r == 0 ? 0 : r - 1;
+	return r - 1;
 }

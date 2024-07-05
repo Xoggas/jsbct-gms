@@ -37,7 +37,9 @@
   },
   "name":"jsbct-gms1",
   "resources":[
+    {"id":{"name":"obj_Animation","path":"objects/obj_Animation/obj_Animation.yy",},},
     {"id":{"name":"room_main","path":"rooms/room_main/room_main.yy",},},
+    {"id":{"name":"scr_AnimationBinding","path":"scripts/scr_AnimationBinding/scr_AnimationBinding.yy",},},
     {"id":{"name":"scr_AnimationClip","path":"scripts/scr_AnimationClip/scr_AnimationClip.yy",},},
     {"id":{"name":"scr_Easing","path":"scripts/scr_Easing/scr_Easing.yy",},},
     {"id":{"name":"scr_Keyframe","path":"scripts/scr_Keyframe/scr_Keyframe.yy",},},
